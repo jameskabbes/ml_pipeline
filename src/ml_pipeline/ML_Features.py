@@ -1,25 +1,19 @@
 ### ML-Pipeline
-import ML_ParentClass
-import ML_support as mlsf
-import ML_params as mlp
+import ml_pipeline
 
-###
-import py_starter as ps
 
-class Features( ML_ParentClass.ML_ParentClass ):
+class Features( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 
     SUFFIX = '_FEATURES'
-
     DEFAULT_KWARGS = {
     }
-
     UPDATED_OPTIONS = {
     1: [ 'Open Feature', 'open_Child_user' ],
     }
 
     def __init__( self, Input_File_inst, **override_kwargs ):
 
-        ML_ParentClass.ML_ParentClass.__init__( self, Features.DEFAULT_KWARGS, **override_kwargs )
+        ml_pipeline.ML_ParentClass.ML_ParentClass.__init__( self, Features.DEFAULT_KWARGS, **override_kwargs )
 
         ### Set up Parents
         self.Input_File = Input_File_inst

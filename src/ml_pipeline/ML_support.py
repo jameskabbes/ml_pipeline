@@ -1,15 +1,12 @@
-import custom_xlwings as xw
+import ml_pipeline
+import ml_pipeline.ML_params as mlp
+
+import py_starter.py_starter as ps
+import dir_ops.dir_ops as do
+import analytics_packages.custom_xlwings as cxw
+
 import pandas as pd
-import py_starter as ps
-
-import ML_params as mlp
-
-import dir_ops as do
-from dir_ops import Path
-from dir_ops import Dir
 import datetime
-
-import custom_xlwings as cxw
 import numpy as np
 
 def join_nickname_and_col( nickname, col ):
@@ -67,7 +64,7 @@ def gen_from_template( copy_Path, paste_Path, overwrite = False ):
         else:
             return
 
-    do.copy_paste_file( copy_Path.p, paste_Path.p, print_off = False )
+    copy_Path.copy( paste_Path, print_off = False )
 
 def create_unique_Path( location_Dir, file_root, file_ending ):
 
@@ -88,7 +85,7 @@ def create_unique_Path( location_Dir, file_root, file_ending ):
             padding = '_' + str(counter)
 
         else:
-            return Path( full_path )
+            return do.Path( full_path )
 
 ### Exporting
 def import_df( self, attribute_name_df = None, import_Path = None, **kwargs ):

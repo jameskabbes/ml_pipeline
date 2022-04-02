@@ -1,23 +1,15 @@
-### ML-Pipeline
-import ML_ParentClass
-import ML_support as mlsf
-import ML_params as mlp
+import ml_pipeline
+import ml_pipeline.ML_params as mlp
+import ml_pipeline.ML_support as mlsf
 
-###
-from typing import List, Any
+import py_starter.py_starter as ps
+import dir_ops.dir_ops as do
 
-import custom_xlwings as cxw
-
-from dir_ops import Dir
-from dir_ops import Path
-import dir_ops as do
-import py_starter as ps
-import random
 import time
 import pandas as pd
 
 
-class Model( ML_ParentClass.ML_ParentClass ):
+class Model( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 
     SUFFIX = '_MODEL'
 
@@ -51,7 +43,7 @@ class Model( ML_ParentClass.ML_ParentClass ):
 
     def __init__( self, Models_inst, name, **override_kwargs ):
 
-        ML_ParentClass.ML_ParentClass.__init__( self, Model.DEFAULT_KWARGS, **override_kwargs )
+        ml_pipeline.ML_ParentClass.ML_ParentClass.__init__( self, Model.DEFAULT_KWARGS, **override_kwargs )
 
         ### initalize the attributes
         self.Models = Models_inst
@@ -97,7 +89,7 @@ class Model( ML_ParentClass.ML_ParentClass ):
 
         self.data_Dirs = {}
         for key in self.RELATIVE_DATA_DIR_KEYS:
-            Model_Dir = Dir( self.Models.data_Dirs[key].join( self.name ) )
+            Model_Dir = do.Dir( self.Models.data_Dirs[key].join( self.name ) )
             self.data_Dirs[ key ] = Model_Dir
 
     def _create_Dirs( self ):
@@ -107,7 +99,7 @@ class Model( ML_ParentClass.ML_ParentClass ):
 
     def _set_Paths( self ):
 
-        '''this is separate from _set_Paths because we need to import "algorithm" from the excel file first'''
+        """this is separate from _set_Paths because we need to import "algorithm" from the excel file first"""
 
         for key in mlp.CODE_KEYS:
 
@@ -121,13 +113,13 @@ class Model( ML_ParentClass.ML_ParentClass ):
 
             # algorithm_Path
             Path_key = key + '_Path'
-            Path_value = Path( Dir_value.join( key_code_value + '.py' ) )
+            Path_value = do.Path( Dir_value.join( key_code_value + '.py' ) )
 
             self.set_attr( Path_key, Path_value )
 
-        self.cached_pre_Path =     Path( self.data_Dirs['cached'].join( 'PRE' + self.cached_extension ) )
-        self.cached_cleaned_Path = Path( self.data_Dirs['cached'].join( 'CLEANED' + self.cached_extension ) )
-        self.model_export_Path =   Path( self.data_Dirs['model_pickles'].join( self.algorithm_code + self.pickle_extension ) )
+        self.cached_pre_Path =     do.Path( self.data_Dirs['cached'].join( 'PRE' + self.cached_extension ) )
+        self.cached_cleaned_Path = do.Path( self.data_Dirs['cached'].join( 'CLEANED' + self.cached_extension ) )
+        self.model_export_Path =   do.Path( self.data_Dirs['model_pickles'].join( self.algorithm_code + self.pickle_extension ) )
 
     # Generating templates
     def _gen_templates( self ):

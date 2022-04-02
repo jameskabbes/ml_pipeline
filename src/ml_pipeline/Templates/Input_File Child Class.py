@@ -1,22 +1,19 @@
-import pandas as pd
-import ML_support as mlsf
+import ml_pipeline
+import py_starter.py_starter as ps
+import dir_ops.dir_ops as do
 
-import "__Parent_Input_File_Pointer__" as Parent_Input_File
-import py_starter as ps
-
-import dir_ops as do
-from dir_ops import Path
-from dir_ops import Dir
+import {{Parent_Input_File_Pointer}} as Parent_Input_File
 
 import os
-file_Path = Path( os.path.abspath(__file__) )
+import pandas as pd
+file_Path = do.Path( os.path.abspath(__file__) )
 
 ###
 #  FILL OUT AS NEEDED
 ###
 QUERY = None
 DATABASE_CONN_PARAMS = {}
-__NICKNAME__ = None #This should be automatically replaced by Input_Files.gen_Input_File_child()
+NICKNAME = '{{NICKNAME}}' #This should be automatically replaced by Input_Files.gen_Input_File_child()
 ###
 #
 ###
@@ -34,8 +31,6 @@ class Input_File( Parent_Input_File.Input_File ):
 
         ### set the default/overridden kwargs
         joined_kwargs = ps.replace_default_kwargs( Input_File.DEFAULT_KWARGS, **override_kwargs )
-        self.set_atts( joined_kwargs )
-
         Parent_Input_File.Input_File.__init__( self, Input_Files_inst, **joined_kwargs )
 
     def clean( self ):

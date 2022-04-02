@@ -1,42 +1,30 @@
-### Import the ML Classes
-import ML_ParentClass
-import ML_Model
-import ML_Input_Files
-import ML_Input_File
-import ML_Features
-import ML_Feature
-
-### Import the Other ML Support
-import ML_support as mlsf
-import ML_params as mlp
+import ml_pipeline
+import ml_pipeline.ML_support as mlsf
+import ml_pipeline.ML_params as mlp
 
 ### Analytics-Packages
-import custom_xlwings as cxw
-from dir_ops import Dir
-from dir_ops import Path
-import dir_ops as do
-import py_starter as ps
-import sql_support_functions as ssf
+import analytics_packages.custom_xlwings as cxw
+import dir_ops.dir_ops as do
+import py_starter.py_starter as ps
+import database_connections.sql_support_functions as ssf
 
 ### import other
 import os
-import random
-import time
 import pandas as pd
 
-file_Path = Path( os.path.abspath(__file__) )
+file_Path = do.Path( os.path.abspath(__file__) )
 
 
-class Models( ML_ParentClass.ML_ParentClass ):
+class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 
     SUFFIX = '_MODELS'
 
     DEFAULT_KWARGS = {
-    'Model_class_pointer': ML_Model.Model,
-    'Input_Files_class_pointer': ML_Input_Files.Input_Files,
-    'Input_File_class_pointer': ML_Input_File.Input_File,
-    'Features_class_pointer': ML_Features.Features,
-    'Feature_class_pointer': ML_Feature.Feature,
+    'Model_class_pointer': ml_pipeline.ML_Model.Model,
+    'Input_Files_class_pointer': ml_pipeline.ML_Input_Files.Input_Files,
+    'Input_File_class_pointer': ml_pipeline.ML_Input_File.Input_File,
+    'Features_class_pointer': ml_pipeline.ML_Features.Features,
+    'Feature_class_pointer': ml_pipeline.ML_Feature.Feature,
 
     'user_profile': None,
     'database_conn_params': {},
@@ -58,7 +46,7 @@ class Models( ML_ParentClass.ML_ParentClass ):
 
         self.DEFAULT_KWARGS['Models_class_pointer'] = Models
 
-        ML_ParentClass.ML_ParentClass.__init__( self, self.DEFAULT_KWARGS, **override_kwargs )
+        ml_pipeline.ML_ParentClass.ML_ParentClass.__init__( self, self.DEFAULT_KWARGS, **override_kwargs )
 
         self.name = name
         self.Dir = repo_Dir
@@ -109,7 +97,7 @@ class Models( ML_ParentClass.ML_ParentClass ):
             if not self.has_attr( Dir_key ): #if the user didn't override with their own Dir
 
                 # algorithm_Dir = Dir( self.repo_dir.join( 'Algorithms' )   )
-                Dir_value = Dir( self.Dir.join( relative_dir_value ) )
+                Dir_value = do.Dir( self.Dir.join( relative_dir_value ) )
                 self.set_attr( Dir_key, Dir_value )
 
             else:
@@ -128,7 +116,7 @@ class Models( ML_ParentClass.ML_ParentClass ):
         for relative_data_dir_key in list(mlp.relative_data_dirs.keys()):
 
             relative_data_dir_value = mlp.relative_data_dirs[ relative_data_dir_key ]
-            Dir_value = Dir( self.data_Dir.join( relative_data_dir_value ) )
+            Dir_value = do.Dir( self.data_Dir.join( relative_data_dir_value ) )
             self.data_Dirs[relative_data_dir_key] = Dir_value
 
     def _create_Dirs( self ):
@@ -151,12 +139,12 @@ class Models( ML_ParentClass.ML_ParentClass ):
             suffix = class_pointer.SUFFIX
 
             # repo_Dir/name_FEATURES.py
-            child_class_Path = Path( self.Dir.join( self.name + suffix + '.py' ) )
+            child_class_Path = do.Path( self.Dir.join( self.name + suffix + '.py' ) )
 
             # child_Features_class_Path = child_class_Path
             self.set_attr( 'child_' + class_key + '_class_Path', child_class_Path )
 
-        self.excel_Path = Path( self.Dir.join( self.name + mlp.MODEL_INPUTS_SUFFIX + '.xlsx' ) )
+        self.excel_Path = do.Path( self.Dir.join( self.name + mlp.MODEL_INPUTS_SUFFIX + '.xlsx' ) )
 
     def _gen_child_classes( self ):
 
@@ -364,7 +352,7 @@ class Models( ML_ParentClass.ML_ParentClass ):
 def init_Models( **kwargs ):
 
     name = input('Enter a name for your Models class: ')
-    repo_Dir = Dir(do.get_cwd())
+    repo_Dir = do.Dir(do.get_cwd())
 
     Models_inst = Models( name, repo_Dir, **kwargs )
     return Models_inst

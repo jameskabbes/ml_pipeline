@@ -1,18 +1,12 @@
 ### ML-Pipeline
-import ML_ParentClass
-import ML_support as mlsf
-import ML_params as mlp
+from ml_pipeline import ML_ParentClass
 
-###
-import py_starter as ps
 
 class Feature( ML_ParentClass.ML_ParentClass ):
 
     SUFFIX = '_FEATURE'
-
     DEFAULT_KWARGS = {
     }
-
     UPDATED_OPTIONS = {
     1: [ '', 'do_nothing' ]
     }
@@ -53,13 +47,13 @@ class Feature( ML_ParentClass.ML_ParentClass ):
         else:
             return None
 
-    def print_imp_atts( self, print_off = True ):
+    def print_imp_atts( self, **kwargs ):
 
-        return self._print_imp_atts_helper( atts = ['col','ncol','flag','Input_File'], print_off = print_off )
+        return self._print_imp_atts_helper( atts = ['col','ncol','flag','Input_File'], **kwargs )
 
-    def print_one_line_atts( self, print_off = True, leading_string = '\t' ):
+    def print_one_line_atts( self, **kwargs ):
 
-        return self._print_one_line_atts_helper( atts = ['type','col','ncol','flag','Input_File'], print_off = print_off, leading_string = leading_string )
+        return self._print_one_line_atts_helper( atts = ['type','col','ncol','flag','Input_File'], **kwargs )
 
     def update_ncol( self ):
 

@@ -17,10 +17,11 @@ def split_features_and_target( Model ):
 
 def postprocess( Model ):
 
-    '''Join on the common ID_NCOL index '''
     Model.df_results_pre = Model.df_results_propensity.join( Model.df_pre, how = 'left' )
 
 def model_prep( Model ):
+
+    """Model preparation"""
 
     split_features_and_target( Model )
 
@@ -33,7 +34,9 @@ def model_prep( Model ):
     print('Splitting Dataset')
     Model.df_train, Model.df_test, Model.df_train_target, Model.df_test_target = train_test_split( df_features, df_target, test_size = .25, random_state = 12 )
 
-def fit_model( Model ):
+def fit_model( Model ) -> None:
+
+    """Fits the model"""
 
     ###
     #  THIS IS WHERE YOU PUT YOUR MACHINE LEARNING ALGORITHM CODE
@@ -41,9 +44,9 @@ def fit_model( Model ):
 
     Model.model = None
 
-def run_model( Model ):
+def run_model( Model ) -> None:
 
-    '''Saves the "model" attribute and "df_results_propensity" '''
+    """Saves the "model" attribute and "df_results_propensity" """
 
     ###
     #  Predict Results

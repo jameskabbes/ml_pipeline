@@ -1,16 +1,10 @@
 ### ML-Pipeline
-import ML_ParentClass
-import ML_support as mlsf
-import ML_params as mlp
-
-###
-from dir_ops import Dir
-from dir_ops import Path
-import dir_ops as do
-import py_starter as ps
+import ml_pipeline
+import dir_ops.dir_ops as do
+import py_starter.py_starter as ps
 import pandas as pd
 
-class Input_Files( ML_ParentClass.ML_ParentClass ):
+class Input_Files( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 
     SUFFIX = '_INPUT_FILES'
 
@@ -25,7 +19,7 @@ class Input_Files( ML_ParentClass.ML_ParentClass ):
     def __init__( self, Model_inst, **override_kwargs ):
 
         ##
-        ML_ParentClass.ML_ParentClass.__init__( self, Input_Files.DEFAULT_KWARGS, **override_kwargs )
+        ml_pipeline.ML_ParentClass.ML_ParentClass.__init__( self, Input_Files.DEFAULT_KWARGS, **override_kwargs )
 
         ###
         self.Model = Model_inst
@@ -54,8 +48,6 @@ class Input_Files( ML_ParentClass.ML_ParentClass ):
 
     def print_imp_atts( self, print_off = True ):
 
-        '''This will need to be re-defined by the User's child class'''
-
         string = self._print_imp_atts_helper( atts = ['type'], print_off = False ) + '\n'
         string += 'Input Files:\n'
         for Child_inst in self:
@@ -65,8 +57,6 @@ class Input_Files( ML_ParentClass.ML_ParentClass ):
         return self.print_string( string, print_off = print_off )
 
     def print_one_line_atts( self, print_off = True, leading_string = '\t' ):
-
-        '''This will need to be re-defined by the user for each child class'''
 
         return self._print_one_line_atts_helper( atts = ['type'], print_off = print_off, leading_string = leading_string )
 
@@ -97,7 +87,7 @@ class Input_Files( ML_ParentClass.ML_ParentClass ):
             else:
                 print ('That nickname is already used, enter another')
 
-        Input_File_Path = Path( self.Models.Input_File_child_Dir.join( root + '.py' ) )
+        Input_File_Path = do.Path( self.Models.Input_File_child_Dir.join( root + '.py' ) )
 
         self.gen_Input_File_child( Input_File_Path, nickname )
         self.make_Input_File( Input_File_Path )
@@ -121,13 +111,17 @@ class Input_Files( ML_ParentClass.ML_ParentClass ):
     def gen_Input_File_child( self, Input_File_Path, nickname ):
 
         if not Input_File_Path.exists():
-            do.copy_paste_file( mlp.template_Paths['Input_File_child'].p, Input_File_Path.p )
 
-            string = ps.read_text_file( Input_File_Path.p )
-            string = string.replace( '"__Parent_Input_File_Pointer__"', self.Models.name + self.Input_File_class_pointer.SUFFIX )
-            string = string.replace( '__NICKNAME__ = None', "NICKNAME = '" + nickname + "' ")
+            ml_pipeline.ML_params.template_Paths['Input_File_child'].copy( Input_File_Path )
+            string = Input_File_Path.read()
 
-            ps.write_text_file( Input_File_Path.p, string = string )
+            formatting_dict = {
+                'Parent_Input_File_Pointer': self.Models.name + self.Input_File_class_pointer.SUFFIX,
+                'NICKNAME': nickname
+            }
+            formatted_string = ps.smart_format( string, formatting_dict ) 
+            
+            Input_File_Path.write( string = formatted_string )
 
         else:
             print ('This Input_File already exists')

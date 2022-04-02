@@ -1,9 +1,8 @@
-import ParentClass
-
-import py_starter as ps
+from parent_class import ParentClass
+import py_starter.py_starter as ps
 import random
 
-class ML_ParentClass( ParentClass.ParentClass ):
+class ML_ParentClass( ParentClass ):
 
     BASE_OPTIONS =  {
         1: [ 'open_Child_user', 'open_Child_user' ],
@@ -19,9 +18,9 @@ class ML_ParentClass( ParentClass.ParentClass ):
 
     def __init__( self, DEFAULT_KWARGS, **override_kwargs ):
 
-        ParentClass.ParentClass.__init__( self )
+        ParentClass.__init__( self )
 
-        kwargs = ps.replace_default_kwargs( DEFAULT_KWARGS, **override_kwargs )
+        kwargs = ps.merge_dicts( DEFAULT_KWARGS, override_kwargs )
         self.set_atts( kwargs )
 
         self.OPTIONS = self.BASE_OPTIONS.copy()

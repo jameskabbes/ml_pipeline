@@ -1,8 +1,5 @@
 import os
-import sys
-import dir_ops as do #module found in Analytics-Packages
-from dir_ops import Path #custom classes found in Analytics-Packages
-from dir_ops import Dir #custom classes found in Analytics-Packages
+import dir_ops.dir_ops as do 
 
 '''
 This is a file for all repository-specific parameters.
@@ -10,28 +7,28 @@ If you have something changes user by user, put it in your user profile
 '''
 
 ### Set up the file structure info - these are objects from the Path/Dir classes
-params_Path = Path( os.path.abspath(__file__) )
-repo_Dir = Dir( params_Path.ascend() )
-data_Dir = Dir( repo_Dir.join('Data') )
-wiki_Dir = Dir( repo_Dir.join( repo_Dir.dirs[-1] + '.wiki' ) ) #Repository/Repository.wiki
-templates_Dir = Dir( repo_Dir.join('Templates') )
-main_class_templates_Dir = Dir( templates_Dir.join('Main Class Templates') )
-code_templates_Dir = Dir( templates_Dir.join('Code Templates') )
+params_Path = do.Path( os.path.abspath(__file__) )
+repo_Dir = params_Path.ascend()
+data_Dir = do.Dir( repo_Dir.join('Data') )
+wiki_Dir = do.Dir( repo_Dir.join( repo_Dir.dirs[-1] + '.wiki' ) ) #Repository/Repository.wiki
+templates_Dir = do.Dir( repo_Dir.join('Templates') )
+main_class_templates_Dir = do.Dir( templates_Dir.join('main_class_templates') )
+code_templates_Dir = do.Dir( templates_Dir.join('code_templates') )
 
 template_Paths = {
-'Models':                   Path( main_class_templates_Dir.join('Models.py') ),
-'Model':                    Path( main_class_templates_Dir.join('Model.py') ),
-'Input_Files':              Path( main_class_templates_Dir.join('Input_Files.py') ),
-'Input_File':               Path( main_class_templates_Dir.join('Input_File.py') ),
-'Features':                 Path( main_class_templates_Dir.join('Features.py') ),
-'Feature':                  Path( main_class_templates_Dir.join('Feature.py') ),
-'Input_File_child':         Path( templates_Dir.join('Input_File Child Class.py') ),
-'model_inputs':             Path( templates_Dir.join('model_inputs.xlsx') ),
-'algorithm':                Path( code_templates_Dir.join( 'algorithm.py' ) ),
-'preprocessing':            Path( code_templates_Dir.join( 'preprocessing.py' ) ),
-'postprocessing':           Path( code_templates_Dir.join( 'postprocessing.py' ) ),
-'generic_cleaning':         Path( code_templates_Dir.join( 'generic_cleaning.py' ) ),
-'joining':                  Path( code_templates_Dir.join( 'joining.py') )
+'Models':                   do.Path( main_class_templates_Dir.join('Models.py') ),
+'Model':                    do.Path( main_class_templates_Dir.join('Model.py') ),
+'Input_Files':              do.Path( main_class_templates_Dir.join('Input_Files.py') ),
+'Input_File':               do.Path( main_class_templates_Dir.join('Input_File.py') ),
+'Features':                 do.Path( main_class_templates_Dir.join('Features.py') ),
+'Feature':                  do.Path( main_class_templates_Dir.join('Feature.py') ),
+'Input_File_child':         do.Path( templates_Dir.join('Input_File Child Class.py') ),
+'model_inputs':             do.Path( templates_Dir.join('model_inputs.xlsx') ),
+'algorithm':                do.Path( code_templates_Dir.join( 'algorithm.py' ) ),
+'preprocessing':            do.Path( code_templates_Dir.join( 'preprocessing.py' ) ),
+'postprocessing':           do.Path( code_templates_Dir.join( 'postprocessing.py' ) ),
+'generic_cleaning':         do.Path( code_templates_Dir.join( 'generic_cleaning.py' ) ),
+'joining':                  do.Path( code_templates_Dir.join( 'joining.py') )
 }
 
 relative_dirs = {

@@ -1,17 +1,13 @@
 ### ML-Pipeline
-import ML_ParentClass
-import ML_support as mlsf
-import ML_params as mlp
+import ml_pipeline
+import dir_ops.dir_ops as do
+import py_starter.py_starter as ps
+import database_connections.sql_support_functions as ssf
 
-###
-from dir_ops import Dir
-from dir_ops import Path
-import dir_ops as do
-import py_starter as ps
 import pandas as pd
-import sql_support_functions as ssf
 
-class Input_File( ML_ParentClass.ML_ParentClass ):
+
+class Input_File( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 
     SUFFIX = '_INPUT_FILE'
 
@@ -38,7 +34,7 @@ class Input_File( ML_ParentClass.ML_ParentClass ):
 
     def __init__( self, Input_Files_inst, **override_kwargs ):
 
-        ML_ParentClass.ML_ParentClass.__init__( self, Input_File.DEFAULT_KWARGS, **override_kwargs )
+        ml_pipeline.ML_ParentClass.ML_ParentClass.__init__( self, Input_File.DEFAULT_KWARGS, **override_kwargs )
 
         ### initialize the attributes
         self.Input_Files = Input_Files_inst
@@ -76,23 +72,19 @@ class Input_File( ML_ParentClass.ML_ParentClass ):
 
     def _set_Paths( self ):
 
-        self.raw_Path =            Path( self.Models.data_Dirs['raw'].join( self.root + self.raw_extension ) )
-        self.raw_sample_Path =     Path( self.Models.data_Dirs['raw_samples'].join( self.root + self.raw_sample_extension ) )
-        self.cleaned_Path =        Path( self.Models.data_Dirs['cleaned'].join( self.root + self.cleaned_extension ) )
-        self.cleaned_sample_Path = Path( self.Models.data_Dirs['cleaned_samples'].join( self.root + self.cleaned_sample_extension ) )
-        self.query_export_Path =   Path( self.Models.data_Dirs['query_results_staging'].join( self.raw_Path.filename ) )
+        self.raw_Path =            do.Path( self.Models.data_Dirs['raw'].join( self.root + self.raw_extension ) )
+        self.raw_sample_Path =     do.Path( self.Models.data_Dirs['raw_samples'].join( self.root + self.raw_sample_extension ) )
+        self.cleaned_Path =        do.Path( self.Models.data_Dirs['cleaned'].join( self.root + self.cleaned_extension ) )
+        self.cleaned_sample_Path = do.Path( self.Models.data_Dirs['cleaned_samples'].join( self.root + self.cleaned_sample_extension ) )
+        self.query_export_Path =   do.Path( self.Models.data_Dirs['query_results_staging'].join( self.raw_Path.filename ) )
 
-    def print_imp_atts( self, print_off = True ):
+    def print_imp_atts( self, **kwargs ):
 
-        '''This will need to be re-defined by the User's child class'''
+        return self._print_imp_atts_helper( atts = ['root','nickname'], **kwargs )
 
-        return self._print_imp_atts_helper( atts = ['root','nickname'], print_off = print_off )
+    def print_one_line_atts( self, **kwargs ):
 
-    def print_one_line_atts( self, print_off = True, leading_string = '\t' ):
-
-        '''This will need to be re-defined by the user for each child class'''
-
-        return self._print_one_line_atts_helper( atts = ['type','root','nickname'], print_off = print_off, leading_string = leading_string )
+        return self._print_one_line_atts_helper( atts = ['type','root','nickname'], **kwargs )
 
     def make_Features( self ):
 
@@ -114,7 +106,7 @@ class Input_File( ML_ParentClass.ML_ParentClass ):
                     return
 
             print ('Moving from Query Staging to Raw')
-            do.copy_paste_file( self.query_export_Path.p, self.raw_Path.p )
+            self.query_export_Path.copy( self.raw_Path )
             self.query_export_Path.remove( override = True )
 
             # generating raw sample
@@ -144,13 +136,8 @@ class Input_File( ML_ParentClass.ML_ParentClass ):
 
     def clean( self ):
 
-        print ('THIS NEEDS TO BE DEFINED BY A CHILD CLASS')
-        exit()
-
-    def preprocess( self ):
-
-        print ('THIS NEEDS TO BE DEFINED BY A CHILD CLASS')
-        exit()
+        """this needs to be defined by a child class"""
+        pass
 
     def prep_for_joining( self ):
 
@@ -188,7 +175,7 @@ class Input_File( ML_ParentClass.ML_ParentClass ):
 
             # the user has chosen to override the Models database connection
             if self.database_conn_params != {}:
-                self.database_conn = ssf.import_connection_object( **self.database_conn_params )
+                self.database_conn = ssf.get_DatabaseConnection( **self.database_conn_params )
 
             # the user wants to use the default connection params given
             else:
