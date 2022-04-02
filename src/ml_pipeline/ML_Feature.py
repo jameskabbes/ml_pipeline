@@ -1,5 +1,7 @@
 ### ML-Pipeline
+import ml_pipeline
 from ml_pipeline import ML_ParentClass
+from ml_pipeline import ML_support as mlsf
 
 
 class Feature( ML_ParentClass.ML_ParentClass ):
@@ -63,7 +65,7 @@ class Feature( ML_ParentClass.ML_ParentClass ):
 
         nickname, self.col = mlsf.split_ncol( self.ncol )
 
-    def rename( new_col ):
+    def rename( self, new_col ):
 
         self.col = new_col
-        self.ncol = join_nickname_and_col( self.Input_File.nickname, self.ncol )
+        self.ncol = mlsf.join_nickname_and_col( self.Input_File.nickname, self.ncol )

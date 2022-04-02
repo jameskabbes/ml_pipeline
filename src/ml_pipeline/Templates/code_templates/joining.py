@@ -7,4 +7,4 @@ def join( Model_inst ):
 
     ### Insert joining instructions
 
-    self.df_joined = pd.DataFrame()
+    Model_inst.df_joined = pd.DataFrame()
