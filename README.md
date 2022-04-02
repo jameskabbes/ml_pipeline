@@ -1,4 +1,4 @@
-[Documentation]({pages_url})
+[Documentation](https://jameskabbes.github.io/ml_pipeline)
 
-# {name}
-{description}
+# ml_pipeline
+A centralized pattern for creating Machine Learning pipelines
