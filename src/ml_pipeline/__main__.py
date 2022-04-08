@@ -1,6 +1,8 @@
 import sys
 sys_args = sys.argv[1:]
 
-from ml_pipeline.ml_pipeline import run
+def run( *sys_args ):
+    print ('Running main for ml_pipeline')
+
 run( *sys_args )
 
