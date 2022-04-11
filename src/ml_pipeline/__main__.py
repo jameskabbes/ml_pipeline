@@ -1,8 +1,10 @@
 import sys
 sys_args = sys.argv[1:]
 
+from ml_pipeline.ML_Models import init_Models
+
 def run( *sys_args ):
-    print ('Running main for ml_pipeline')
+    init_Models()    
 
 run( *sys_args )
 
