@@ -24,11 +24,14 @@ template_Paths = {
 'Feature':                  do.Path( main_class_templates_Dir.join('Feature.py') ),
 'Input_File_child':         do.Path( templates_Dir.join('Input_File Child Class.py') ),
 'model_inputs':             do.Path( templates_Dir.join('model_inputs.xlsx') ),
+'main_py':                  do.Path( templates_Dir.join( 'main.py') ),
+'main_ipy':                 do.Path( templates_Dir.join( 'main.ipynb') ),
 'algorithm':                do.Path( code_templates_Dir.join( 'algorithm.py' ) ),
 'preprocessing':            do.Path( code_templates_Dir.join( 'preprocessing.py' ) ),
 'postprocessing':           do.Path( code_templates_Dir.join( 'postprocessing.py' ) ),
 'generic_cleaning':         do.Path( code_templates_Dir.join( 'generic_cleaning.py' ) ),
 'joining':                  do.Path( code_templates_Dir.join( 'joining.py') )
+
 }
 
 relative_dirs = {

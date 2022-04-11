@@ -59,6 +59,7 @@ class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 
         ### Generate the templates from the newly found excel data, if the files don't exist
         self._gen_child_classes()
+        self._gen_main()
         self.load_Models()
         self._export_to_excel()
 
@@ -145,6 +146,8 @@ class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
             self.set_attr( 'child_' + class_key + '_class_Path', child_class_Path )
 
         self.excel_Path = do.Path( self.Dir.join( self.name + mlp.MODEL_INPUTS_SUFFIX + '.xlsx' ) )
+        self.main_py_Path = do.Path( self.Dir.join( '_'.join([ mlp.template_Paths['main_py'].root , self.name ]) + mlp.template_Paths['main_py'].extension ) )
+        self.main_ipy_Path = do.Path( self.Dir.join( '_'.join([ mlp.template_Paths['main_ipy'].root , self.name ]) + mlp.template_Paths['main_ipy'].extension ) )
 
     def _gen_child_classes( self ):
 
@@ -163,6 +166,11 @@ class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
     def _gen_excel( self ):
 
         mlsf.gen_from_template( mlp.template_Paths['model_inputs'], self.excel_Path )
+
+    def _gen_main( self ):
+
+        mlsf.gen_from_template( mlp.template_Paths['main_py'], self.main_py_Path, formatting_dict={ "MODELS_PATH_ROOT": self.child_Models_class_Path.root } )
+        mlsf.gen_from_template( mlp.template_Paths['main_ipy'], self.main_ipy_Path, formatting_dict={ "MODELS_PATH_ROOT": self.child_Models_class_Path.root } )
 
     def print_imp_atts( self, print_off = True ): #if print_off==True, returns None, else: returns str
 
@@ -352,7 +360,6 @@ class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 def init_Models( **kwargs ):
 
     name = input('Enter a name for your Models class: ')
-    repo_Dir = do.Dir(do.get_cwd())
-
-    Models_inst = Models( name, repo_Dir, **kwargs )
-    return Models_inst
+    if name != '':
+        Models_inst = Models( name, ml_pipeline.cwd_Dir, **kwargs )
+        return Models_inst
