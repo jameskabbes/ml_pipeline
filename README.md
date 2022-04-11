@@ -10,17 +10,7 @@ Contains a host of tools for standardizing the format of machine learning pipeli
 Read this high-level overview is necessary to understand how the package operates.
 
 **Code Hierarchy**
-*Class* Models
-&darr;
-*Class* Model
-&darr;
-*Class* Input_Files
-&darr;
-*Class* Input_File
-&darr;
-*Class* Features
-&darr;
-*Class* Feature
+Models &rarr; Model &rarr; Input_Files &rarr; Input_File &rarr; Features &rarr; Feature
 
 Each point in the hierarchy has certain methods and attributes associated with it. These methods give you the functionality for operating the pipeline.
 
