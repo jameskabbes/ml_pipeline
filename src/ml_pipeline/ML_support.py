@@ -9,14 +9,14 @@ import pandas as pd
 import datetime
 import numpy as np
 
-def join_nickname_and_col( nickname, col ):
+def join_nickname_and_col( nickname: str, col: str ) -> str:
 
-    '''Given "EXP", "HOME_AGE", return "EXP-HOME_AGE" '''
+    """Given "EXP", "HOME_AGE", return "EXP-HOME_AGE" """
     return nickname + mlp.NICKNAME_SEP + col
 
 def split_ncol( string ):
 
-    '''Given EXP-HOME_AGE, return ("EXP", "HOME_AGE") '''
+    """Given EXP-HOME_AGE, return ("EXP", "HOME_AGE") """
     values = string.split( mlp.NICKNAME_SEP )
 
     nickname = values[0]
@@ -29,7 +29,7 @@ def split_ncol( string ):
 
 def get_df_from_dict( dictionary: dict, key_col: str = 'Key', val_col: str = 'Value' ) -> pd.DataFrame:
 
-    '''Given a dictionary, turn it into a pandas DF with KEY and VALUE columns'''
+    """Given a dictionary, turn it into a pandas DF with KEY and VALUE columns"""
 
     keys = []
     vals = []
@@ -42,7 +42,7 @@ def get_df_from_dict( dictionary: dict, key_col: str = 'Key', val_col: str = 'Va
 
 def get_dict_from_df( df, key_col: str = 'Key', val_col: str = 'Value' ) -> dict:
 
-    '''for a dataframe with keys and values, return a dictionary'''
+    """for a dataframe with keys and values, return a dictionary"""
     dict_mapping = {}
 
     for i in range(len(df)):
@@ -50,13 +50,17 @@ def get_dict_from_df( df, key_col: str = 'Key', val_col: str = 'Value' ) -> dict
 
     return dict_mapping
 
-def generate_sample_df( df, length = 100 ):
+def generate_sample_df( df: pd.DataFrame, length = 100 ) -> pd.DataFrame:
+
+    """returns a sample of a dataframe with a given lenght"""
 
     if len(df) > length:
         return df.sample( length )
     return df
 
-def gen_from_template( copy_Path, paste_Path, overwrite = False ):
+def gen_from_template( copy_Path: do.Path, paste_Path: do.Path, overwrite = False, formatting_dict = {} ) -> None:
+
+    """generates a template file and formats accordingly"""
 
     if paste_Path.exists():
         if overwrite:
@@ -65,8 +69,11 @@ def gen_from_template( copy_Path, paste_Path, overwrite = False ):
             return
 
     copy_Path.copy( paste_Path, print_off = False )
+    paste_Path.smart_format( formatting_dict )
 
-def create_unique_Path( location_Dir, file_root, file_ending ):
+def create_unique_Path( location_Dir, file_root, file_ending ) -> do.Path:
+
+    """finds a unique Path in a Dir"""
 
     dt_string = datetime.datetime.now().strftime( '%Y-%m-%d' )
     existing_Paths = location_Dir.list_contents_Paths( block_dirs = True, block_paths = False )
@@ -110,9 +117,9 @@ def export_df( self, attribute_name_df = None, export_Path = None, df = pd.DataF
 
     export_df_to_Path( df, export_Path, **kwargs )
 
-def import_df_from_Path( Path_df, print_off = True, **kwargs ):
+def import_df_from_Path( Path_df: do.Path, print_off: bool = True, **kwargs ) -> pd.DataFrame:
 
-    '''import a file from given path into a pandas dataframe '''
+    """Given a Path, import a dataframe from the location with specified instructions based on the file extension"""
 
     if print_off:
         print ('Importing DataFrame from ' + Path_df.p)
@@ -134,9 +141,9 @@ def import_df_from_Path( Path_df, print_off = True, **kwargs ):
         print ('No instructions on how to import file with ending ' + Path_df.ending)
         return None
 
-def export_df_to_Path( df, Path_df, print_off = True, **kwargs ):
+def export_df_to_Path( df: pd.DataFrame, Path_df: do.Path, print_off: bool = True, **kwargs ):
 
-    '''given a df and a path, export the dataframe'''
+    """Given a DF and a Path, export the dataframe to the location with specified instructions based on the file extension"""
 
     if print_off:
         print ('Exporting DataFrame to ' + Path_df.p)
