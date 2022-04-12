@@ -1,0 +1,10 @@
+kabbes_py_starter>=0.6.0
+kabbes_parent_class>=0.2.0
+kabbes_analytics_packages>=0.3.0
+kabbes_dir_ops>=0.3.0
+kabbes_database_connections>=0.2.0
+pandas
+numpy
+matplotlib
+shap
+scikit-learn

@@ -9,6 +9,9 @@ import pandas as pd
 import datetime
 import numpy as np
 
+import shap
+import matplotlib.pyplot as plt
+
 def join_nickname_and_col( nickname: str, col: str ) -> str:
 
     """Given "EXP", "HOME_AGE", return "EXP-HOME_AGE" """
@@ -166,8 +169,6 @@ def export_df_to_Path( df: pd.DataFrame, Path_df: do.Path, print_off: bool = Tru
 
 def shap_importance( Model ):
 
-    import shap
-    import matplotlib.pyplot as plt
     shap.initjs()
 
     shap_Dir = Model.data_Dirs['shap']
