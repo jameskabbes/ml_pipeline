@@ -4,8 +4,8 @@ import ml_pipeline.ML_params as mlp
 
 ### Analytics-Packages
 import analytics_packages.custom_xlwings as cxw
-import dir_ops.dir_ops as do
-import py_starter.py_starter as ps
+import dir_ops as do
+import py_starter as ps
 import database_connections.sql_support_functions as ssf
 
 ### import other
@@ -361,5 +361,5 @@ def init_Models( **kwargs ):
 
     name = input('Enter a name for your Models class: ')
     if name != '':
-        Models_inst = Models( name, ml_pipeline.cwd_Dir, **kwargs )
+        Models_inst = Models( name, ml_pipeline._cwd_Dir, **kwargs )
         return Models_inst

@@ -1,5 +1,5 @@
 import os
-import dir_ops.dir_ops as do 
+import dir_ops as do 
 
 '''
 This is a file for all repository-specific parameters.

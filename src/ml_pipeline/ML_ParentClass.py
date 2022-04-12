@@ -1,5 +1,5 @@
 from parent_class import ParentClass
-import py_starter.py_starter as ps
+import py_starter as ps
 import random
 
 class ML_ParentClass( ParentClass ):

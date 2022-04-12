@@ -1,6 +1,6 @@
 import ml_pipeline
-import py_starter.py_starter as ps
-import dir_ops.dir_ops as do
+import py_starter as ps
+import dir_ops as do
 
 import {{Parent_Input_File_Pointer}} as Parent_Input_File
 
