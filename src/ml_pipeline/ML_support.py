@@ -1,13 +1,16 @@
 import ml_pipeline
 import ml_pipeline.ML_params as mlp
 
-import py_starter.py_starter as ps
-import dir_ops.dir_ops as do
+import py_starter as ps
+import dir_ops as do
 import analytics_packages.custom_xlwings as cxw
 
 import pandas as pd
 import datetime
 import numpy as np
+
+import shap
+import matplotlib.pyplot as plt
 
 def join_nickname_and_col( nickname: str, col: str ) -> str:
 
@@ -69,7 +72,9 @@ def gen_from_template( copy_Path: do.Path, paste_Path: do.Path, overwrite = Fals
             return
 
     copy_Path.copy( paste_Path, print_off = False )
-    paste_Path.smart_format( formatting_dict )
+
+    if formatting_dict != {}:
+        paste_Path.smart_format( formatting_dict )
 
 def create_unique_Path( location_Dir, file_root, file_ending ) -> do.Path:
 
@@ -166,8 +171,6 @@ def export_df_to_Path( df: pd.DataFrame, Path_df: do.Path, print_off: bool = Tru
 
 def shap_importance( Model ):
 
-    import shap
-    import matplotlib.pyplot as plt
     shap.initjs()
 
     shap_Dir = Model.data_Dirs['shap']

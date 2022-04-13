@@ -1,6 +1,6 @@
 ### import from ml_pipeline
 import ml_pipeline
-import py_starter.py_starter as ps
+import py_starter as ps
 
 
 
