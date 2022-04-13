@@ -266,7 +266,7 @@ class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
         '''get a database connection from said database_conn_params, only needed if you query an Input File'''
 
         if self.database_conn == None:
-            self.database_conn = ssf.import_connection_object( **self.database_conn_params )
+            self.database_conn = ssf.get_DatabaseConnection( **self.database_conn_params )
 
     def delete_results( self, override = False ):
 
