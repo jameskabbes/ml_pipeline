@@ -71,7 +71,7 @@ def gen_from_template( copy_Path: do.Path, paste_Path: do.Path, overwrite = Fals
         else:
             return
 
-    copy_Path.copy( paste_Path, print_off = False )
+    copy_Path.copy( Destination = paste_Path, print_off = False )
 
     if formatting_dict != {}:
         paste_Path.smart_format( formatting_dict )
