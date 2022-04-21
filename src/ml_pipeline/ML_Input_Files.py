@@ -112,7 +112,7 @@ class Input_Files( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 
         if not Input_File_Path.exists():
 
-            ml_pipeline.ML_params.template_Paths['Input_File_child'].copy( Input_File_Path )
+            ml_pipeline.ML_params.template_Paths['Input_File_child'].copy( Destination = Input_File_Path )
             string = Input_File_Path.read()
 
             formatting_dict = {
