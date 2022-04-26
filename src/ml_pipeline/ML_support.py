@@ -68,7 +68,7 @@ def gen_from_template( copy_Path: do.Path, paste_Path: do.Path, overwrite = Fals
     copy_Path.copy( Destination = paste_Path, print_off = False, override = True, overwrite = overwrite )
 
     if formatting_dict != {}:
-        paste_Path.smart_format( formatting_dict )
+        paste_Path.smart_format( formatting_dict = formatting_dict )
 
 def create_unique_Path( location_Dir, file_root, file_ending ) -> do.Path:
 
