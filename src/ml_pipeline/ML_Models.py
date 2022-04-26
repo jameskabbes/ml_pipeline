@@ -283,8 +283,8 @@ class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
             ]
 
         for Dir_to_delete in Dirs_to_delete:
-            Dir_to_delete.remove( override = override ) #delete the folder and all contents
-            Dir_to_delete.create() #create the folder again
+            if Dir_to_delete.remove( override = override ): #delete the folder and all contents
+                Dir_to_delete.create( override = True ) #create the folder again if the deletion was successful
 
         print ('To properly save changes, exit the program')
 
