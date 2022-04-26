@@ -107,7 +107,7 @@ class Input_File( ml_pipeline.ML_ParentClass.ML_ParentClass ):
                     return
 
             print ('Moving from Query Staging to Raw')
-            if self.query_export_Path.copy( Destination = self.raw_Path ):
+            if self.query_export_Path.copy( Destination = self.raw_Path, override = True ):
                 self.query_export_Path.remove( override = True )
 
             # generating raw sample
