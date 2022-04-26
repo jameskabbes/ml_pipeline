@@ -65,7 +65,8 @@ def gen_from_template( copy_Path: do.Path, paste_Path: do.Path, overwrite = Fals
 
     """generates a template file and formats accordingly"""
 
-    copy_Path.copy( Destination = paste_Path, print_off = False, override = True, overwrite = overwrite )
+    if not paste_Path.exists() or overwrite:
+        copy_Path.copy( Destination = paste_Path, print_off = False, override = True, overwrite = overwrite )
 
     if formatting_dict != {}:
         paste_Path.smart_format( formatting_dict = formatting_dict )
