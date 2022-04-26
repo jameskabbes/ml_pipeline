@@ -125,9 +125,11 @@ class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
         '''initialize the Dirs if they do not already exist '''
 
         for Dir in self.Dirs:
-            Dir.create()
+            if not Dir.exists():
+                Dir.create( override = True )
         for key in self.data_Dirs:
-            self.data_Dirs[ key ].create()
+            if not self.data_Dirs[ key ].exists():
+                self.data_Dirs[ key ].create( override = True )
 
     def _set_Paths( self ):
 
