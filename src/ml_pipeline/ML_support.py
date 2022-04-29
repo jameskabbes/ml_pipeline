@@ -65,16 +65,11 @@ def gen_from_template( copy_Path: do.Path, paste_Path: do.Path, overwrite = Fals
 
     """generates a template file and formats accordingly"""
 
-    if paste_Path.exists():
-        if overwrite:
-            paste_Path.remove( override = True )
-        else:
-            return
-
-    copy_Path.copy( paste_Path, print_off = False )
+    if not paste_Path.exists() or overwrite:
+        copy_Path.copy( Destination = paste_Path, print_off = False, override = True, overwrite = overwrite )
 
     if formatting_dict != {}:
-        paste_Path.smart_format( formatting_dict )
+        paste_Path.smart_format( formatting_dict = formatting_dict )
 
 def create_unique_Path( location_Dir, file_root, file_ending ) -> do.Path:
 

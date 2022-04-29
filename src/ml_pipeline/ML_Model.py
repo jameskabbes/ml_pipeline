@@ -95,7 +95,8 @@ class Model( ml_pipeline.ML_ParentClass.ML_ParentClass ):
     def _create_Dirs( self ):
 
         for key in self.data_Dirs:
-            self.data_Dirs[ key ].create()
+            if not self.data_Dirs[ key ].exists():
+                self.data_Dirs[ key ].create( override = True )
 
     def _set_Paths( self ):
 
