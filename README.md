@@ -1,26 +1,29 @@
-[GitHub Pages](https://jameskabbes.github.io/ml_pipeline)
+[GitHub Pages](https://jameskabbes.github.io/ml_pipeline)<br>
+[PyPI](https://pypi.org/project/kabbes-ml-pipeline)
 
 # ml_pipeline
 A centralized pattern for creating Machine Learning pipelines
+
+<br>
+
+# Installation 
+`pip install kabbes_ml_pipeline`
+
+<br>
 
 # Description
 Contains a host of tools for standardizing the format of machine learning pipelines. Provides methods for querying databases, cleaning data, preprocessing data, model operations, exporting results, and more. Each machine learning project is a "child" of this template, with the ability to overwrite any of the default class attributes/methods.
 
 # Code Overview
-Read this high-level overview is necessary to understand how the package operates.
+Read this high-level overview is necessary to understand how the package operates. <br>
 
-**Code Hierarchy**
-Models &rarr; Model &rarr; Input_Files &rarr; Input_File &rarr; Features &rarr; Feature
+**Code Hierarchy** <br>
+Models &rarr; Model &rarr; Input_Files &rarr; Input_File &rarr; Features &rarr; Feature <br>
 
 Each point in the hierarchy has certain methods and attributes associated with it. These methods give you the functionality for operating the pipeline.
 
-
-# First Time Setup
-If you have not installed the garden, follow the instructions here: [the_garden](https://www.github.com/jameskabbes/the_garden)
-
 # Usage
-High-level overviews for common operations. For more detailed instructions, checkout the Pages.
-
+For more in-depth documentation, read the information provided on the Pages. Or better yet, read the source code.
 
 ## Initializing a Repo for ml_pipeline
 
@@ -38,7 +41,7 @@ python -m ml_pipeline
 
 ## Navigating the Menu
 
-1. Run `python main_XXX.py` This opens the Models options screen, along with the options for the "Models" class instance.
+1. Run `python main_XYZ.py` This opens the Models options screen, along with the options for the "Models" class instance.
 2. To navigate one level down to a Model, select the option "Open Model"
 3. Select a Model from the list.
 4. Now in the Model options screen, press enter to navigate back up to Models.
@@ -48,7 +51,7 @@ python -m ml_pipeline
 
 ## Query new Raw Data
 
-1. `python main_XXX.py`
+1. `python main_XYZ.py`
 2. At the Models options screen, select "Open Model".
 3. Select any Model from the list (this selection does not matter)
 4. In the Model options screen, select "Open Input Files".
@@ -69,17 +72,18 @@ python -m ml_pipeline
 
 ## Running one Model
 
-1. `python main_XXX.py`
+1. `python main_XYZ.py`
 2. At the Models options screen, select the option for "Open Model"
 3. Select the Model you would like to run
 4. In the Model options screen, select the option for "Run Pipeline"
 
 ## Running all Models
 
-1. `python main_XXX.py`
+1. `python main_XYZ.py`
 2. At the Models options screen, select the option for "Run Models"
 
 
+<br>
 
 # Author(s)
 James Kabbes

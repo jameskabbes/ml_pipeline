@@ -1,8 +1,8 @@
-kabbes_py_starter>=0.7.0
-kabbes_parent_class>=0.4.0
-kabbes_dir_ops>=0.5.0
-kabbes_analytics_packages>=0.4.0
-kabbes_database_connections>=0.3.0
+kabbes_py_starter>=0.8.0
+kabbes_parent_class>=0.5.0
+kabbes_dir_ops>=0.7.0
+kabbes_analytics_packages>=0.5.0
+kabbes_database_connections>=0.5.0
 pandas
 numpy
 matplotlib
