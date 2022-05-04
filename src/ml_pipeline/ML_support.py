@@ -214,7 +214,7 @@ def shap_importance( Model ):
     df_temp.sort_values(by=["SHAP"], ascending=False, inplace=True)
     top_features = list(df_temp['Features'])
 
-    for i in range( int(Model.top_shap_features) ):
+    for i in range( min( int(Model.top_shap_features), len( Model.df_features.columns ) ) ):
 
         shap.dependence_plot( top_features[i], shap_values, Model.df_features, interaction_index = None, show = False )
         plt.gcf().set_size_inches( 12.0, 12.0 )
