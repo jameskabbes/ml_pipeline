@@ -83,6 +83,9 @@ class Features( ml_pipeline.ML_ParentClass.ML_ParentClass ):
             if nickname == self.Input_File.nickname:
                 flag = self.Model.df_features.loc[ i, self.Model.name ]
 
+                if flag not in self.Models.feature_flag_codes:
+                    flag = self.Models.default_feature_flag
+
                 if self.Models.feature_flag_codes[ flag ] != 'ignore':
                     self.make_Feature( ncol, flag )
 
