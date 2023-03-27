@@ -4,7 +4,7 @@ import dir_ops as do
 import py_starter as ps
 import pandas as pd
 
-class Input_Files( ml_pipeline.ML_ParentClass.ML_ParentClass ):
+class Input_Files( ml_pipeline.Base.ML_ParentClass ):
 
     SUFFIX = '_INPUT_FILES'
 
@@ -19,7 +19,7 @@ class Input_Files( ml_pipeline.ML_ParentClass.ML_ParentClass ):
     def __init__( self, Model_inst, **override_kwargs ):
 
         ##
-        ml_pipeline.ML_ParentClass.ML_ParentClass.__init__( self, Input_Files.DEFAULT_KWARGS, **override_kwargs )
+        ml_pipeline.Base.ML_ParentClass.__init__( self, Input_Files.DEFAULT_KWARGS, **override_kwargs )
 
         ###
         self.Model = Model_inst

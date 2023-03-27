@@ -1,8 +1,8 @@
-[GitHub Pages](https://jameskabbes.github.io/ml_pipeline)<br>
-[PyPI](https://pypi.org/project/kabbes-ml-pipeline)
-
 # ml_pipeline
 A centralized pattern for creating Machine Learning pipelines
+
+[Documentation](https://jameskabbes.github.io/ml_pipeline)<br>
+[PyPI](https://pypi.org/project/kabbes-ml-pipeline)
 
 <br>
 

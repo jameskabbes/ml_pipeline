@@ -1,0 +1,16 @@
+{
+
+    "Feature":{
+        "flags":{
+            "codes":{
+                "ignore": "ignore",
+                "drop": "drop_at_preprocess",
+                "use": "use_in_model"        
+            },
+            "default": "ignore"
+        }
+    },
+
+    "PARQUET_ENGINE": "fastparquet"
+
+}

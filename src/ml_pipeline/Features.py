@@ -1,9 +1,9 @@
 ### ML-Pipeline
 import ml_pipeline
 import ml_pipeline.ML_params as mlp
-import ml_pipeline.ML_support as mlsf
+import ml_pipeline.utils as mlsf
 
-class Features( ml_pipeline.ML_ParentClass.ML_ParentClass ):
+class Features( ml_pipeline.Base.ML_ParentClass ):
 
     SUFFIX = '_FEATURES'
     DEFAULT_KWARGS = {
@@ -14,7 +14,7 @@ class Features( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 
     def __init__( self, Input_File_inst, **override_kwargs ):
 
-        ml_pipeline.ML_ParentClass.ML_ParentClass.__init__( self, Features.DEFAULT_KWARGS, **override_kwargs )
+        ml_pipeline.Base.ML_ParentClass.__init__( self, Features.DEFAULT_KWARGS, **override_kwargs )
 
         ### Set up Parents
         self.Input_File = Input_File_inst

@@ -1,6 +1,6 @@
 ### ML-Pipeline
 import ml_pipeline
-import ml_pipeline.ML_support as mlsf
+import ml_pipeline.utils as mlsf
 import dir_ops as do
 import py_starter as ps
 import database_connections.sql_support_functions as ssf
@@ -8,7 +8,7 @@ import database_connections.sql_support_functions as ssf
 import pandas as pd
 
 
-class Input_File( ml_pipeline.ML_ParentClass.ML_ParentClass ):
+class Input_File( ml_pipeline.Base.ML_ParentClass ):
 
     SUFFIX = '_INPUT_FILE'
 
@@ -35,7 +35,7 @@ class Input_File( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 
     def __init__( self, Input_Files_inst, **override_kwargs ):
 
-        ml_pipeline.ML_ParentClass.ML_ParentClass.__init__( self, Input_File.DEFAULT_KWARGS, **override_kwargs )
+        ml_pipeline.Base.ML_ParentClass.__init__( self, Input_File.DEFAULT_KWARGS, **override_kwargs )
 
         ### initialize the attributes
         self.Input_Files = Input_Files_inst

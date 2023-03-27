@@ -1,10 +1,10 @@
 ### ML-Pipeline
 import ml_pipeline
-from ml_pipeline import ML_ParentClass
-from ml_pipeline import ML_support as mlsf
+from ml_pipeline import Base
+from ml_pipeline import utils as mlsf
 
 
-class Feature( ML_ParentClass.ML_ParentClass ):
+class Feature( Base.ML_ParentClass ):
 
     SUFFIX = '_FEATURE'
     DEFAULT_KWARGS = {
@@ -17,7 +17,7 @@ class Feature( ML_ParentClass.ML_ParentClass ):
     def __init__( self, Features_inst, ncol, flag, **override_kwargs ):
 
         ##
-        ML_ParentClass.ML_ParentClass.__init__( self, Feature.DEFAULT_KWARGS, **override_kwargs )
+        Base.ML_ParentClass.__init__( self, Feature.DEFAULT_KWARGS, **override_kwargs )
 
         ### Set up parents
         self.Features = Features_inst
