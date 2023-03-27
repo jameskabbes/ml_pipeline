@@ -1,3 +1,3 @@
-from ml_pipeline.ML_Models import init_Models
-init_Models()    
-
+import ml_pipeline
+M = ml_pipeline.Models()
+M.run()

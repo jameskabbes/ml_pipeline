@@ -1,6 +1,6 @@
 import ml_pipeline
 import ml_pipeline.ML_params as mlp
-import ml_pipeline.ML_support as mlsf
+import ml_pipeline.utils as mlsf
 
 import py_starter as ps
 import dir_ops as do
@@ -9,7 +9,7 @@ import time
 import pandas as pd
 
 
-class Model( ml_pipeline.ML_ParentClass.ML_ParentClass ):
+class Model( ml_pipeline.Base.ML_ParentClass ):
 
     SUFFIX = '_MODEL'
 
@@ -43,7 +43,7 @@ class Model( ml_pipeline.ML_ParentClass.ML_ParentClass ):
 
     def __init__( self, Models_inst, name, **override_kwargs ):
 
-        ml_pipeline.ML_ParentClass.ML_ParentClass.__init__( self, Model.DEFAULT_KWARGS, **override_kwargs )
+        ml_pipeline.Base.ML_ParentClass.__init__( self, Model.DEFAULT_KWARGS, **override_kwargs )
 
         ### initalize the attributes
         self.Models = Models_inst

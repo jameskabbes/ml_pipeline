@@ -1,6 +1,7 @@
 import ml_pipeline
-import ml_pipeline.ML_support as mlsf
-import ml_pipeline.ML_params as mlp
+import ml_pipeline.utils as mlsf
+
+from parent_class import ParentPluralDict
 
 ### Analytics-Packages
 import analytics_packages.custom_xlwings as cxw
@@ -12,19 +13,17 @@ import database_connections.sql_support_functions as ssf
 import os
 import pandas as pd
 
-file_Path = do.Path( os.path.abspath(__file__) )
 
-
-class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
+class Models( ParentPluralDict, ml_pipeline.Base ):
 
     SUFFIX = '_MODELS'
 
     DEFAULT_KWARGS = {
-    'Model_class_pointer': ml_pipeline.ML_Model.Model,
-    'Input_Files_class_pointer': ml_pipeline.ML_Input_Files.Input_Files,
-    'Input_File_class_pointer': ml_pipeline.ML_Input_File.Input_File,
-    'Features_class_pointer': ml_pipeline.ML_Features.Features,
-    'Feature_class_pointer': ml_pipeline.ML_Feature.Feature,
+    'Model_class_pointer': ml_pipeline.Model.Model,
+    'Input_Files_class_pointer': ml_pipeline.InputFiles.Input_Files,
+    'Input_File_class_pointer': ml_pipeline.InputFile.Input_File,
+    'Features_class_pointer': ml_pipeline.Features.Features,
+    'Feature_class_pointer': ml_pipeline.Feature.Feature,
 
     'user_profile': None,
     'database_conn_params': {},
@@ -34,7 +33,7 @@ class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
     'feature_flag_codes': mlp.FEATURE_FLAG_CODES.copy()
     }
 
-    UPDATED_OPTIONS = {
+    _OVERRIDE_OPTIONS = {
     1: [ 'Open Model', 'open_Child_user' ],
     2: [ 'Run Models', 'run_Models' ],
     3: [ 'Make Model', 'make_Model_user' ],
@@ -45,12 +44,12 @@ class Models( ml_pipeline.ML_ParentClass.ML_ParentClass ):
     def __init__( self, name, repo_Dir, **override_kwargs ):
 
         self.DEFAULT_KWARGS['Models_class_pointer'] = Models
-
-        ml_pipeline.ML_ParentClass.ML_ParentClass.__init__( self, self.DEFAULT_KWARGS, **override_kwargs )
+        
+        ParentPluralDict.__init__( self, att='Models')
+        ml_pipeline.Base.ML_ParentClass.__init__( self, self.DEFAULT_KWARGS, **override_kwargs )
 
         self.name = name
         self.Dir = repo_Dir
-        self.Models = {} #key is the Model name, value is the Model Object
 
         self._set_Dirs()
         self._set_Paths()
