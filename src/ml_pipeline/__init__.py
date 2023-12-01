@@ -1,6 +1,6 @@
 import dir_ops as do
 import os
-import py_starter as ps
+import py_seedlings as ps
 
 ###
 _Dir = do.Dir( os.path.abspath( __file__ ) ).ascend()   #Dir that contains the package 

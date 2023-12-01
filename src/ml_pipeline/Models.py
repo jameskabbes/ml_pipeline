@@ -6,7 +6,7 @@ from parent_class import ParentPluralDict
 ### Analytics-Packages
 import analytics_packages.custom_xlwings as cxw
 import dir_ops as do
-import py_starter as ps
+import py_seedlings as ps
 import database_connections.sql_support_functions as ssf
 
 ### import other

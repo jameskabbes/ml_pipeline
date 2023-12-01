@@ -1,5 +1,5 @@
 from kabbes_menu import Menu
-import py_starter as ps
+import py_seedlings as ps
 import random
 
 
